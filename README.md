@@ -36,6 +36,7 @@ This is a list of standards and conventions that we follow in the different code
 3. Select appropriate changes and ensure correctness.
 4. Thoroughly test merged code.
 5. Commit resolved merge and complete pull request.
+
 ## Pull Request Guidelines
 1. Provide a clear, concise title.
 2. Include a description of the branch's purpose.
