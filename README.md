@@ -4,32 +4,44 @@ This is a list of standards and conventions that we follow in the different code
 
 ## Table of Contents
 **Features, Commits, and Pull Requests**
+- [Commit Messages](#commit-messages)
 - [Branching Strategy](#branching-strategy)
 - [Hotfix Branches](#hotfix-branches)
 - [Merge Conflict Resolution](#merge-conflict-resolution)
+- [Pull Request Guidelines](#pull-request-guidelines)
 - [Continuous Integration and Deployment](#continuous-integration-and-deployment)
 
+## Commit Messages
+1. Keep titles short and describe the core change.
+2. Use the commit message body for additional "what" and "why" details.
+
 ## Branching Strategy
-1. Use two primary branches:
-   - `main`: The stable, production-ready branch. All code in `main` should be thoroughly tested and ready for deployment.
-   - `develop`: The branch for integrating feature branches and performing testing before merging into `main`.
-2. For each new feature, bug fix, or task, create a new branch from `develop` using the naming convention: `author/feature-issue-name`.
-3. Work on the feature branch, making regular commits with descriptive messages.
-4. When the feature is complete, create a pull request from the feature branch to `develop`. This allows for tracking changes and facilitates code review if needed in the future.
-5. Once the pull request is approved (manually or through automated checks), merge the feature branch into `develop`.
-6. Regularly merge `develop` into `main` when the changes in `develop` are stable and ready for production. This can be done manually or through a scheduled job in your CI/CD pipeline.
+1. Use `main` as the stable, production-ready branch and `develop` for integrating feature branches and testing.
+2. Create branches from `develop` with the naming convention `author/feature-issue-name`.
+3. Make regular commits with descriptive messages on the feature branch.
+4. Create a pull request from the feature branch to `develop` for tracking changes and code review.
+5. Merge the feature branch into `develop` after approval.
+6. Regularly merge `develop` into `main` for stable production changes.
+7. Delete feature branches after merging `develop` into `main`.
+8. Keep your local `develop` branch updated with the remote.
 
 ## Hotfix Branches
-1. For critical bugs in production, create a new `hotfix` branch directly from `main` using the naming convention: `hotfix/issue-name`.
-2. Make the necessary fixes in the `hotfix` branch and create a pull request to merge the changes back into both `main` and `develop`.
-3. Once the pull request is approved and passes all tests, merge the `hotfix` branch into both `main` and `develop`, and delete the `hotfix` branch.
+1. Create a `hotfix` branch from `main` for critical bugs in production.
+2. Make fixes in the `hotfix` branch and create a pull request to merge changes into `main` and `develop`.
+3. After approval and passing tests, merge the `hotfix` branch into `main` and `develop`, then delete the branch.
 
 ## Merge Conflict Resolution
-1. When encountering merge conflicts, the person responsible for the merge should carefully review the conflicting changes.
-2. Communicate with the other developers if needed to understand the intent behind the conflicting changes.
-3. Resolve the conflicts by selecting the appropriate changes and ensuring the resulting code is correct and functional.
-4. Test the merged code thoroughly to ensure no regressions or unintended side effects.
-5. Commit the resolved merge and complete the pull request.
+1. Review conflicting changes carefully.
+2. Communicate with developers for clarity.
+3. Select appropriate changes and ensure correctness.
+4. Thoroughly test merged code.
+5. Commit resolved merge and complete pull request.
+## Pull Request Guidelines
+1. Provide a clear, concise title.
+2. Include a description of the branch's purpose.
+3. Link to related issues or tickets so issues can be closed and users/clients can be notified.
+4. Ensure all CI/CD checks pass.
+5. Keep PRs small and focused for easier merging.
 
 ## Continuous Integration and Deployment
 1. For new projects, set up a CI/CD pipeline that automatically builds, tests, and deploys the code from the `main` branch.
