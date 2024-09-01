@@ -17,7 +17,7 @@ This is a list of standards and conventions that we follow in the different code
 3. Work on the feature branch, making regular commits with descriptive messages.
 4. When the feature is complete, create a pull request from the feature branch to `develop`. This allows for tracking changes and facilitates code review if needed in the future.
 5. Once the pull request is approved (manually or through automated checks), merge the feature branch into `develop`.
-6. Regularly merge `develop` into `main` when the changes in `develop` are stable and ready for production. This can be done manually or through a scheduled job in your CI/CD pipeline.
+6. Regularly merge `develop` into `main` when the changes in `develop` are stable and ready for production. This can be done manually or through a scheduled job in project CI/CD pipelines.
 
 ## Hotfix Branches
 1. For critical bugs in production, create a new `hotfix` branch directly from `main` using the naming convention: `hotfix/issue-name`.
