@@ -1,5 +1,9 @@
 #!/bin/bash
 
+detailed_instructions_url="https://github.com/Automacene/.github"
+branching_strategy_url="$detailed_instructions_url?tab=readme-ov-file#branching-strategy"
+hotfix_branches_url="$detailed_instructions_url?tab=readme-ov-file#hotfix-branches"
+
 # Function to check branch naming convention
 check_branch_name() {
     local branch_name="$1"
@@ -17,6 +21,7 @@ check_branch_name() {
         echo "  - refactor/author/refactor-name"
         echo "  - chore/author/chore-name"
         echo "  - hotfix/author/hotfix-name"
+        echo "For more details, refer to the detailed instructions at: $branching_strategy_url"
         return 1
     fi
 }
@@ -25,6 +30,12 @@ check_branch_name() {
 check_develop_branch() {
     if ! git rev-parse --verify develop > /dev/null 2>&1; then
         echo "Error: 'develop' branch does not exist. Please create it."
+        echo "For example, in command line, you can do the following:"
+        echo "  git checkout -b develop"
+        echo "For example, in Github Desktop, you can do the following:"
+        echo "  1. Click on the 'Current Branch' dropdown and select 'New Branch'"
+        echo "  2. Enter the branch name 'develop' and click 'Create Branch'"
+        echo "For more details, refer to the detailed instructions at: $branching_strategy_url"
         return 1
     fi
     return 0
@@ -34,7 +45,14 @@ check_develop_branch() {
 prevent_develop_commits() {
     local branch_name="$1"
     if [ "$branch_name" = "develop" ]; then
-        echo "Error: Direct commits to 'develop' branch are not allowed. Please create a feature branch and submit a pull request."
+        echo "Error: Direct commits to 'develop' branch are not allowed."
+        echo "Please create a feature branch and submit a pull request."
+        echo "For example, in command line, you can do the following:"
+        echo "  git checkout -b feature/author/feature-name"
+        echo "For example, in Github Desktop, you can do the following:"
+        echo "  1. Click on the 'Current Branch' dropdown and select 'New Branch'"
+        echo "  2. Enter the branch name in the format 'feature/author/feature-name' and click 'Create Branch'"
+        echo "For more details, refer to the detailed instructions at: $branching_strategy_url"
         return 1
     fi
     return 0
@@ -44,8 +62,22 @@ prevent_main_commits() {
     local branch_name="$1"
     if [ "$branch_name" = "main" ]; then
         echo "Error: Direct commits to 'main' branch are not allowed."
-        echo "Please create a feature branch from 'develop' and submit a pull request."
-        echo "If the changes are urgent, create a hotfix branch from 'main'."
+        echo "Please checkout the 'develop' branch and make a new feature branch from there."
+        echo "For example, in command line, you can do the following:"
+        echo "  git checkout develop"
+        echo "  git checkout -b feature/author/feature-name"
+        echo "For example, in Github Desktop, you can do the following:"
+        echo "  1. Click on the 'Current Branch' dropdown and select 'develop'"
+        echo "  2. Click on the 'Current Branch' dropdown again and select 'New Branch'"
+        echo "  3. Enter the branch name in the format 'feature/author/feature-name' and click 'Create Branch'"
+        echo "If you need to fix a critical issue, stay on the 'main' branch and create a hotfix branch."
+        echo "For example, in command line, you can do the following:"
+        echo "  git checkout -b hotfix/author/hotfix-name"
+        echo "For example, in Github Desktop, you can do the following:"
+        echo "  1. Click on the 'Current Branch' dropdown and select 'main'"
+        echo "  2. Click on the 'Current Branch' dropdown again and select 'New Branch'"
+        echo "  3. Enter the branch name in the format 'hotfix/author/hotfix-name' and click 'Create Branch'"
+        echo "For more details, refer to the detailed instructions at: $hotfix_branches_url"
         return 1
     fi
     return 0
@@ -57,6 +89,10 @@ create_hook_content() {
 #!/bin/bash
 
 local_branch="\$(git rev-parse --abbrev-ref HEAD)"
+
+detailed_instructions_url="$detailed_instructions_url"
+branching_strategy_url="$branching_strategy_url"
+hotfix_branches_url="$hotfix_branches_url"
 
 # Source the functions from the install script
 source "\$(dirname "\$0")/pre-commit-functions.sh"
