@@ -6,7 +6,7 @@ check_branch_name() {
     local valid_branch_regex="^(feature|bug|enhancement|refactor|chore)/[a-z]+/[a-z0-9-]+$"
     local valid_hotfix_regex="^hotfix/[a-z]+/[a-z0-9-]+$"
 
-    if [[ $branch_name =~ $valid_branch_regex ]] || [[ $branch_name =~ $valid_hotfix_regex ]] || [ "$branch_name" = "main" ]; then
+    if [[ $branch_name =~ $valid_branch_regex ]] || [[ $branch_name =~ $valid_hotfix_regex ]]; then
         return 0
     else
         echo "Error: Branch name '$branch_name' does not follow the naming convention."
@@ -40,6 +40,17 @@ prevent_develop_commits() {
     return 0
 }
 
+prevent_main_commits() {
+    local branch_name="$1"
+    if [ "$branch_name" = "main" ]; then
+        echo "Error: Direct commits to 'main' branch are not allowed."
+        echo "Please create a feature branch from 'develop' and submit a pull request."
+        echo "If the changes are urgent, create a hotfix branch from 'main'."
+        return 1
+    fi
+    return 0
+}
+
 # Function to create the pre-commit hook content
 create_hook_content() {
     cat << EOL
@@ -52,6 +63,7 @@ source "\$(dirname "\$0")/pre-commit-functions.sh"
 
 check_develop_branch || exit 1
 prevent_develop_commits "\$local_branch" || exit 1
+prevent_main_commits "\$local_branch" || exit 1
 check_branch_name "\$local_branch" || exit 1
 EOL
 }
@@ -69,6 +81,7 @@ create_pre_commit_hook() {
 $(declare -f check_branch_name)
 $(declare -f check_develop_branch)
 $(declare -f prevent_develop_commits)
+$(declare -f prevent_main_commits)
 EOL
 
     # Create the pre-commit hook
@@ -86,3 +99,5 @@ else
     echo "Error: This script must be run from the root of a Git repository."
     exit 1
 fi
+
+read -p "Press Enter to continue..."
