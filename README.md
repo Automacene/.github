@@ -17,7 +17,12 @@ This is a list of standards and conventions that we follow in the different code
 
 ## Branching Strategy
 1. Use `main` as the stable, production-ready branch and `develop` for integrating feature branches and testing.
-2. Create branches from `develop` with the naming convention `author/feature-issue-name`.
+2. Create branches from `develop` with the naming convention `feature/author/feature-name`. Valid prefixes are:
+    - `feature/` for new features.
+    - `bug/` for bug fixes.
+    - `enhancement/` for enhancements like performance improvements, etc.
+    - `refactor/` for refactoring.
+    - `chore/` for maintenance tasks like updating dependencies, tests, etc.
 3. Make regular commits with descriptive messages on the feature branch.
 4. Create a pull request from the feature branch to `develop` for tracking changes and code review.
 5. Merge the feature branch into `develop` after approval.
