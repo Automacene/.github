@@ -1,0 +1,2 @@
+# .github
+Standards and practices.
