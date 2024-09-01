@@ -26,7 +26,7 @@ This is a list of standards and conventions that we follow in the different code
 8. Keep your local `develop` branch updated with the remote.
 
 ## Hotfix Branches
-1. Create a `hotfix` branch from `main` for critical bugs in production.
+1. Create a `hotfix` branch from `main` for critical bugs in production in the format `hotfix/author/issue-name`.
 2. Make fixes in the `hotfix` branch and create a pull request to merge changes into `main` and `develop`.
 3. After approval and passing tests, merge the `hotfix` branch into `main` and `develop`, then delete the branch.
 
