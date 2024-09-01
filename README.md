@@ -25,13 +25,12 @@ This is a list of standards and conventions that we follow in the different code
 3. Once the pull request is approved and passes all tests, merge the `hotfix` branch into both `main` and `develop`, and delete the `hotfix` branch.
 
 ## Merge Conflict Resolution
-1. When encountering merge conflicts, the person responsible for the merge (you or your brother) should carefully review the conflicting changes.
-2. Communicate with the other developer if needed to understand the intent behind the conflicting changes.
+1. When encountering merge conflicts, the person responsible for the merge should carefully review the conflicting changes.
+2. Communicate with the other developers if needed to understand the intent behind the conflicting changes.
 3. Resolve the conflicts by selecting the appropriate changes and ensuring the resulting code is correct and functional.
 4. Test the merged code thoroughly to ensure no regressions or unintended side effects.
 5. Commit the resolved merge and complete the pull request.
 
 ## Continuous Integration and Deployment
-1. Set up a CI/CD pipeline that automatically builds, tests, and deploys the code from the `main` branch to your production environment.
+1. For new projects, set up a CI/CD pipeline that automatically builds, tests, and deploys the code from the `main` branch.
 2. Configure the pipeline to run tests and security scans on pull requests targeting the `develop` branch to catch issues early.
-3. As your team grows and your project matures, consider adding automated code quality checks and AI-assisted code reviews to your pipeline.
